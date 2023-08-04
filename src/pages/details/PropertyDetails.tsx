@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { useFetchProperty } from "src/hooks/useFetchProperty";
+import { AxiosResponse } from "axios";
 import useProgressiveImage from "src/hooks/useProgressiveImage";
 import { faBed, faBath, faCircle } from '@fortawesome/free-solid-svg-icons';
 import { faCircle as faCircleOutline, faGem } from '@fortawesome/free-regular-svg-icons';
@@ -29,7 +30,7 @@ const PropertyDetails = () => {
     const { isFavourite, removeFavourites, addFavourites } = useFavourite();
     const propertyIsSaved = isFavourite(id!);
 
-    const onSuccessPropertyLoaded = () => {
+    const onSuccessPropertyLoaded = (data: AxiosResponse) => {
         console.log('Successfully loaded property');
 
         const allPropertyImages = [
