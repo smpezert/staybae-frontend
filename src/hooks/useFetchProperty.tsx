@@ -1,17 +1,20 @@
-import { UseBaseQueryOptions, useQuery } from "react-query";
-import Axios from "src/api/Axios";
 import { AxiosResponse } from "axios";
+import { useQuery } from "react-query";
+import Axios from "src/api/Axios";
 
-const fetchProperty = (props: UseBaseQueryOptions) => {
-    const propertyId = props.queryKey ? props.queryKey[1] : 0;
+const fetchProperty = (propertyId: string) => {
     return Axios.get(`/properties/${propertyId}`);
-}
+};
 
 export const useFetchProperty = (
     id: string,
-    onSuccess: (data: AxiosResponse) => void
+    onSuccessHandler: (data: AxiosResponse) => void
 ) => {
-    return useQuery([`property-detail`, id], fetchProperty, {
-        onSuccess
+    return useQuery({
+        queryKey: [`property`, id],
+        queryFn: () => fetchProperty(id),
+        onSuccess(data) {
+            onSuccessHandler(data);
+        }
     });
-}
+};
