@@ -2,7 +2,7 @@
 import { useContext } from 'react';
 import FavouriteContext from 'src/components/context/FavouritesContext';
 import { XCircleIcon } from '@heroicons/react/24/outline';
-import SmallCard from '../mediumCard/SmallCard';
+import SmallCard from '../cards/SmallCard';
 
 interface FavouriteProps {
     setIsShowFavourites: (val: boolean) => void;

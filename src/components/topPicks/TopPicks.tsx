@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import Axios from 'src/api/Axios';
 import Skeleton from '../skeleton/Skeleton';
 import PropertyType from 'src/interfaces/Property';
-import MediumCard from '../mediumCard/MediumCard';
+import MediumCard from '../cards/MediumCard';
 import { Link } from 'react-router-dom';
 import { useFetchTopPicks } from 'src/hooks/useFetchTopPicks';
 

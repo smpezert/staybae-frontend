@@ -1,6 +1,6 @@
 import { format } from "date-fns";
 import { useLocation } from "react-router-dom";
-import InfoCard from "src/components/mediumCard/InfoCard";
+import InfoCard from "src/components/cards/InfoCard";
 import { useSearchResults } from "src/hooks/useSearchResults";
 import PropertyType from "src/interfaces/Property";
 
