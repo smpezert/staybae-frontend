@@ -13,7 +13,8 @@ const Banner = () => {
             state: {
                 startDate: new Date().toISOString(),
                 endDate: endDate.toISOString(),
-                numberOfGuests: 10
+                numberOfGuests: 10,
+                region: "Worldwide"
             }
         });
     }
