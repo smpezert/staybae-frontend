@@ -81,14 +81,14 @@ const PropertyDetails = () => {
                     <div className="text-xl md:text-2xl font-semibold">{data?.data?.description}</div>
                     <div className="flex flex-row justify-between">
                         <div className="flex flex-row items-center">
-                            property && (
-                            <Rating
-                                doSingle={true}
-                                id={data?.data?._id!}
-                                ratingScore={data?.data?.rating}
-                                propertyRating={data?.data?.rating}
-                            />
-                            )
+                            {data?.data && (
+                                <Rating
+                                    doSingle={true}
+                                    id={data?.data?._id!}
+                                    ratingScore={data?.data?.rating}
+                                    propertyRating={data?.data?.rating}
+                                />
+                            )}
                             <span className="m-2">&bull;</span>
                             <span className="text-sm mx-2">{data?.data?.numVotes} votes</span>
                             <span className="m-2">&bull;</span>

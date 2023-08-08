@@ -3,6 +3,7 @@ import { HeartIcon as Favourited } from '@heroicons/react/24/solid';
 import { HeartIcon as NotFavourited } from '@heroicons/react/24/outline';
 import Rating from '../rating/Rating';
 import { format } from 'date-fns';
+import useFavourite from 'src/hooks/useFavourite';
 
 type MediumProperty = {
     property: PropertyType
@@ -13,15 +14,26 @@ const MediumCard = ({ property }: MediumProperty) => {
     const formattedEndDate = format(new Date(property.dateTo), 'd MMM');
     const range = `${formattedStartDate} - ${formattedEndDate}`;
 
+    const { isFavourite, removeFavourites, addFavourites } = useFavourite();
+    const propertyIsSaved = isFavourite(property._id!);
+
+    const toggleSave = () => {
+        if (propertyIsSaved) {
+            removeFavourites(property._id!);
+        } else {
+            addFavourites(property);
+        }
+    }
+
     return (
         <div className='flex flex-col h-[450px] items-center m-2 mt-5 cursor-pointer bg-gray-100 hover:bg-gray-200 hover:scale-105 transition transform duration-200 ease-out rounded-b-lg'>
             <div className="overflow-hidden rounded-t-lg w-full">
                 <img className='relative h-60 w-full object-cover' src={property.heroImg} alt={`${property.city} - ${property.country}`} />
 
-                {property.favourited ?
+                {propertyIsSaved ?
                     (<Favourited className='text-red-600 h-8 absolute top-4 right-6 cursor-pointer hover:scale-110'
-                        title='Saved as favourite' />) : (<NotFavourited className='text-red-600 h-8 absolute top-4 right-6 cursor-pointer hover:scale-110'
-                            title='Not in your favourite list' />)
+                        onClick={toggleSave} title='Saved as favourite' />) : (<NotFavourited className='text-red-600 h-8 absolute top-4 right-6 cursor-pointer hover:scale-110'
+                            onClick={toggleSave} title='Not in your favourite list' />)
                 }
             </div>
 
