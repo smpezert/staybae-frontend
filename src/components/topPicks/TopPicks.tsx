@@ -1,9 +1,6 @@
-import { useEffect, useState } from 'react';
-import Axios from 'src/api/Axios';
 import Skeleton from '../skeleton/Skeleton';
 import PropertyType from 'src/interfaces/Property';
 import MediumCard from '../cards/MediumCard';
-import { Link } from 'react-router-dom';
 import { useFetchTopPicks } from 'src/hooks/useFetchTopPicks';
 
 const TopPicks = () => {
@@ -16,12 +13,7 @@ const TopPicks = () => {
             {!isLoading &&
                 data?.data.map((topPickProperty: PropertyType, tpId: number) => {
                     return (
-                        <Link
-                            to={`/property/${topPickProperty._id}`}
-                            key={`top-pick-${tpId}`}
-                        >
-                            <MediumCard property={topPickProperty} />
-                        </Link>
+                        <MediumCard property={topPickProperty} key={`top-pick-${tpId}`} />
                     );
                 })}
         </div>

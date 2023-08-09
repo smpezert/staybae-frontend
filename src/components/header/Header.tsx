@@ -8,9 +8,9 @@ import { DateRangePicker } from 'react-date-range';
 import RegionAsia from '../../assets/images/region-asia.png';
 import RegionFlexible from '../../assets/images/region-flexible.jpeg';
 import RegionUsa from '../../assets/images/region-usa.png';
-import RegionEu from '../../assets/images/region-aus.png';
+import RegionAus from '../../assets/images/region-aus.png';
 import RegionSouthUsa from '../../assets/images/region-south-america.png';
-import RegionAus from '../../assets/images/region-eu.png';
+import RegionEu from '../../assets/images/region-eu.png';
 
 type Props = {
     setIsShowingFavourites: (val: boolean) => void;
