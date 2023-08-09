@@ -10,8 +10,8 @@ import { ReactQueryDevtools } from 'react-query/devtools';
 import Home from './pages/home/Home';
 import PropertyDetails from './pages/details/PropertyDetails';
 import Search from './pages/search/Search';
-import NotFound from './pages/404/NotFound';
 import AboutUs from './pages/aboutUs/AboutUs';
+import NotFound from './pages/404/NotFound';
 
 const progress = new ProgressBar({
   size: 4,
@@ -42,7 +42,7 @@ function App() {
           <Route path='/home' element={<Home />} />
           <Route path='/property/:id' element={<PropertyDetails />} />
           <Route path='/search' element={<Search />} />
-          <Route path='/aboutUs' element={<AboutUs />} />
+          <Route path='/about-us' element={<AboutUs />} />
           <Route path='/page-not-found' element={<NotFound />} />
           <Route path='*' element={<Navigate to={'/page-not-found'} replace />} />
         </Route>
