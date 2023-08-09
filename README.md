@@ -6,12 +6,12 @@ application as a whole.
 
 You are expected to attempt as many of the following challenges:
 
-- [ ] Ensure that the favourites can be selected from the Top Picks as well be removed from the
+- [X] Ensure that the favourites can be selected from the Top Picks as well be removed from the
       favourite list (similar to the Property Details page)
 
 - [ ] Add the ability to remove items from the favourites list
 
-- [ ] On the footer, create a link or amend the footer to add an ‘About Us’ page. Create a new about
+- [X] On the footer, create a link or amend the footer to add an ‘About Us’ page. Create a new about
       us page and add content to it. You must ensure you can navigate to it as well once it’s clicked.
 
 - [ ] Enhance the search results to render a map. For this, you will be required to use Google Maps.
