@@ -14,7 +14,7 @@ You are expected to attempt as many of the following challenges:
 - [X] On the footer, create a link or amend the footer to add an ‘About Us’ page. Create a new about
       us page and add content to it. You must ensure you can navigate to it as well once it’s clicked.
 
-- [ ] Enhance the search results to render a map. For this, you will be required to use Google Maps.
+- [X] Enhance the search results to render a map. For this, you will be required to use Google Maps.
       This will also require you to obtain a personal access token from the Google Developers portal.
 
 - [ ] Add more properties to the application and add their longitude/latitude (to show more markers
