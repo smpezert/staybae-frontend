@@ -1,6 +1,7 @@
 import { format } from "date-fns";
 import { useLocation } from "react-router-dom";
 import InfoCard from "src/components/cards/InfoCard";
+import Maps from "src/components/maps/Maps";
 import { useSearchResults } from "src/hooks/useSearchResults";
 import PropertyType from "src/interfaces/Property";
 
@@ -53,6 +54,9 @@ const Search = () => {
                             <InfoCard property={searchResult} key={sId} />
                         ))
                     )}
+                </div>
+                <div className="flex flex-col">
+                    <Maps />
                 </div>
             </section>
         </div>
