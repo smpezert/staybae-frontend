@@ -1,5 +1,7 @@
 import { format } from "date-fns";
+import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
+import { loadMapApi } from "src/api/GoogleMapsApi";
 import InfoCard from "src/components/cards/InfoCard";
 import Maps from "src/components/maps/Maps";
 import { useSearchResults } from "src/hooks/useSearchResults";
@@ -25,6 +27,15 @@ const Search = () => {
 
     const { data } = useSearchResults(fromDate, toDate, searchLocation, region);
     const searchResults: PropertyType[] = data?.data;
+
+    const [scriptLoaded, setScriptLoaded] = useState(false);
+
+    useEffect(() => {
+        const googleMapScript = loadMapApi();
+        googleMapScript?.addEventListener('load', () => {
+            setScriptLoaded(true);
+        })
+    }, [])
 
     return (
         <div className="flex pt-10">
@@ -56,7 +67,9 @@ const Search = () => {
                     )}
                 </div>
                 <div className="flex flex-col">
-                    <Maps />
+                    {scriptLoaded && (
+                        <Maps mapType={google.maps.MapTypeId.ROADMAP} mapTypeControl={true} />
+                    )}
                 </div>
             </section>
         </div>
