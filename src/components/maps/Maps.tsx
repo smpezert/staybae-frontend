@@ -1,52 +1,30 @@
-import React, { useEffect, useRef, useState } from "react";
-import { useLoadScript, MarkerF, InfoWindow, GoogleMapProps } from '@react-google-maps/api';
+import { GoogleMap, Marker, useLoadScript } from '@react-google-maps/api';
+import React, { useMemo, useState } from 'react';
 
+type Coordinates = {
+    lat: number;
+    lng: number;
+};
+type MapProps = {
+    googleMapsApiKey: string;
+};
 
-interface IMap {
-    mapType: google.maps.MapTypeId,
-    mapTypeControl?: boolean;
-}
+const Maps: React.FC = () => {
+    const { isLoaded } = useLoadScript({
+        id: "google-map-script",
+        googleMapsApiKey: import.meta.env.VITE_GOOGLE_MAPS_API_KEY
+    })
+    const center = useMemo(() => ({ lat: 53.457, lng: -2.157 }), [])
+    const [selectedMarker, setSelectedMarker] = useState<Coordinates | null>(center);
 
-type GoogleLatLng = google.maps.LatLng;
-type GoogleMap = google.maps.Map;
+    if (!isLoaded) return <div>Map is loading ...</div>
 
-const Maps: React.FC<IMap> = ({ mapType, mapTypeControl = false }) => {
-
-    const ref = useRef<HTMLDivElement>(null);
-    const [map, setMap] = useState<GoogleMap>();
-
-    const startMap = (): void => {
-        if (!map) {
-            defaultMapStart();
-        }
-    }
-
-    useEffect(startMap, [map]);
-
-    const defaultMapStart = (): void => {
-        const defaultAddress = new google.maps.LatLng(53.457, 2.157);
-        initMap(5, defaultAddress);
-    }
-
-    const initMap = (zoomLevel: number, address: GoogleLatLng): void => {
-        if (ref.current) {
-            setMap(
-                new google.maps.Map(ref.current, {
-                    zoom: zoomLevel,
-                    center: address,
-                    mapTypeControl: mapTypeControl,
-                    streetViewControl: false,
-                    zoomControl: true,
-                    mapTypeId: mapType,
-                    draggableCursor: 'pointer',
-                })
-            );
-        }
-    }
 
     return (
-        <div className="flex justify-center p-7">
-            <div ref={ref} className="flex justify-center h-60 w-80"></div>
+        <div className="flex justify-center p-1 my-2 mx-2 md:my-10">
+            <GoogleMap zoom={12} center={center} mapContainerClassName="flex justify-center h-60 w-80">
+                <Marker position={center} onClick={() => { setSelectedMarker(center); }}></Marker>
+            </GoogleMap>
         </div>
     )
 }

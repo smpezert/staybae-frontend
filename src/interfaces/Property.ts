@@ -3,6 +3,8 @@ interface PropertyType {
     city: string;
     country: string;
     region: string;
+    lat: number;
+    lon: number;
     description: string;
     caption?: string;
     rating: number;
