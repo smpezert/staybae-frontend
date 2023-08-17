@@ -4,7 +4,7 @@ interface PropertyType {
     country: string;
     region: string;
     lat: number;
-    lon: number;
+    lng: number;
     description: string;
     caption?: string;
     rating: number;
