@@ -7,13 +7,13 @@ type MapProps = {
 };
 
 const Maps = ({ property }: MapProps) => {
-    console.log(property);
+
     const { isLoaded } = useLoadScript({
         id: "google-map-script",
         googleMapsApiKey: import.meta.env.VITE_GOOGLE_MAPS_API_KEY
     });
 
-    const center = useMemo(() => ({ lat: 53.457, lng: -2.157 }), []);
+    const center = useMemo(() => ({ lat: 0, lng: 0 }), []);
 
     if (!isLoaded) return <div>Map is loading ...</div>
 
@@ -22,8 +22,8 @@ const Maps = ({ property }: MapProps) => {
     }
 
     return (
-        <div className="flex justify-center p-1 my-2 mx-2">
-            <GoogleMap zoom={3} center={center} mapContainerClassName="h-80 w-full object-cover">
+        <div className="flex justify-center p-0 my-0 mx-2">
+            <GoogleMap zoom={2} center={center} mapContainerClassName="h-80 w-full object-cover">
                 {property.map((property, sId) => (
                     <MarkerF position={{ lat: property.lat, lng: property.lng }} key={sId} />))}
             </GoogleMap>
