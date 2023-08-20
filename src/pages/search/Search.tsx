@@ -44,7 +44,7 @@ const Search = () => {
                     <p className="button">More Filters</p>
                 </div>
                 <div className="flex flex-col">
-                    <Maps />
+                    <Maps property={searchResults} />
                 </div>
                 <div className="flex flex-col">
                     {!searchResults || searchResults?.length === 0 ? (

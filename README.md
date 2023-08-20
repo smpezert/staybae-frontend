@@ -17,7 +17,7 @@ You are expected to attempt as many of the following challenges:
 - [X] Enhance the search results to render a map. For this, you will be required to use Google Maps.
       This will also require you to obtain a personal access token from the Google Developers portal.
 
-- [ ] Add more properties to the application and add their longitude/latitude (to show more markers
+- [X] Add more properties to the application and add their longitude/latitude (to show more markers
       on the map).
 
 Bonus:
