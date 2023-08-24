@@ -18,6 +18,7 @@ import { HeartIcon as FavouritedHeartIcon } from '@heroicons/react/20/solid';
 import LoadingImage from 'src/assets/images/loading-image.gif';
 import Rating from "src/components/rating/Rating";
 import useFavourite from "src/hooks/useFavourite";
+import Places from "src/components/places/Places";
 
 const PropertyDetails = () => {
     const [images, setImages] = useState<string[]>([]);
@@ -237,6 +238,9 @@ const PropertyDetails = () => {
                 </div>
             </div>
             <hr className="w-full m-6 border-1 border-gray-200 mx-auto" />
+            <div>
+                <Places lat={data?.data.lat} lng={data?.data.lng} />
+            </div>
         </main>
     )
 }

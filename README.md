@@ -22,6 +22,6 @@ You are expected to attempt as many of the following challenges:
 
 Bonus:
 
-- [ ] Add places of interest on each property when you access the property details page. This can
+- [X] Add places of interest on each property when you access the property details page. This can
       be achieved by using the longitude and latitude of the property and Google Maps for places of
       interest close to that.
