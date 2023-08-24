@@ -1,18 +1,11 @@
 import { GoogleMap, MarkerF, useLoadScript } from "@react-google-maps/api";
-import { useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
+import Axios from "src/api/Axios";
 
 type MapProps = {
     lat: number;
     lng: number;
 };
-console.log(location.pathname);
-
-const URL = `${import.meta.env.VITE_GOOGLE_MAPS_API_PLACES_URL}?key=${import.meta.env.VITE_GOOGLE_MAPS_API_KEY}&location=-33.8670522,151.1957362&radius=5000&type=restaurant`;
-
-const results = await fetch(URL)
-    .then(data => data.json())
-    .then(jsonData => jsonData.results)
-    .catch(error => console.log(error));
 
 const Places = ({ lat, lng }: MapProps) => {
 
@@ -21,13 +14,36 @@ const Places = ({ lat, lng }: MapProps) => {
         googleMapsApiKey: import.meta.env.VITE_GOOGLE_MAPS_API_KEY
     });
 
+    const PROPERTY_RADIUS = 5000;
+    const PLACE_TYPE = "restaurant";
+
+    const [Listing, setListing] = useState([]);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const response = await Axios.get(`${import.meta.env.VITE_GOOGLE_MAPS_API_PLACES_URL}`,
+                {
+                    headers: { "Access-Control-Allow-Origin": "http://localhost:8080" },
+                    params: {
+                        location: `${lat},${lng}`,
+                        radius: PROPERTY_RADIUS,
+                        type: PLACE_TYPE,
+                        key: import.meta.env.VITE_GOOGLE_MAPS_API_KEY
+                    },
+                });
+            setListing(response?.data.results);
+        };
+
+        fetchData();
+    }, [lat, lng])
+
     const center = useMemo(() => ({ lat: 0, lng: 0 }), []);
 
     if (!isLoaded) return <div>Map is loading ...</div>
 
     if (!lat || !lng) return null;
 
-    if (!results) return null;
+    // if (!places) return null;
 
     return (
         <div>
@@ -40,10 +56,11 @@ const Places = ({ lat, lng }: MapProps) => {
             <div className="flex flex-col py-3 my-2">
                 <h1 className="text-xl md:text-2xl font-semibold">Places of interest nearby</h1>
                 <ul className="my-3 list-style-type:none;">
-                    {results.map((result: any, id: number) => (
+                    {Listing.map((result: any, id: number) => (
                         <div className="flex flex-row space-x-6" key={id}>
                             <li className="my-2 text-gray-500">{result.name}</li>
-                            <li>_</li>
+                            <img className="flex items-center h-5 w-5 mt-2 rounded-full"
+                                src={result.icon} alt="place icon" height={50} width={150} />
                             <li className="my-2  text-gray-500">{result.vicinity}</li>
                         </div>
                     ))}
