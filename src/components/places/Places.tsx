@@ -23,7 +23,7 @@ const Places = ({ lat, lng }: MapProps) => {
         const fetchData = async () => {
             const response = await Axios.get(`${import.meta.env.VITE_GOOGLE_MAPS_API_PLACES_URL}`,
                 {
-                    headers: { "Access-Control-Allow-Origin": `${import.meta.env.VITE_SERVER_API}` },
+                    headers: { "Access-Control-Allow-Origin": `${import.meta.env.VITE_APP_API_URI}` },
                     params: {
                         location: `${lat},${lng}`,
                         radius: PROPERTY_RADIUS,
