@@ -48,7 +48,7 @@ const MediumCard = ({ property }: MediumProperty) => {
                         <span>&bull;</span>
                         <span className="text-sm">{property.numRooms} ROOMS</span>
                         <span>&bull;</span>
-                        <span className="text-sm">{property.numbToilets} TOILETS</span>
+                        <span className="text-sm">{property.numToilets} TOILETS</span>
                     </div>
                     <div className="flex flex-row justify-between">
                         <span className="font-bold text-md">{property.city}, {property.country}</span>
