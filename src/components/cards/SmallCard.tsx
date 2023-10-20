@@ -1,4 +1,4 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import useFavourite from 'src/hooks/useFavourite';
 import { HeartIcon as Favourited } from '@heroicons/react/24/solid';
 

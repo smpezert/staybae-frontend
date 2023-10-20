@@ -2,7 +2,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import StayBaeLogo from '../../assets/images/staybae.png';
 import { MagnifyingGlassIcon, HeartIcon, UsersIcon } from '@heroicons/react/20/solid';
 import { useState } from 'react';
-import { DateRangePicker } from 'react-date-range';
+import { DateRangePicker, RangeKeyDict } from 'react-date-range';
 
 //region images:
 import RegionAsia from '../../assets/images/region-asia.png';
@@ -33,10 +33,13 @@ const Header = (props: Props) => {
 
     const navigate = useNavigate();
 
-    const handleSelectedDate = (ranges: any) => {
-        setStartDate(ranges.selection.startDate);
-        setEndDate(ranges.selection.endDate);
-
+    const handleSelectedDate = (ranges: RangeKeyDict) => {
+        if (ranges.selection.startDate) {
+            setStartDate(ranges.selection.startDate);
+        }
+        if (ranges.selection.endDate) {
+            setEndDate(ranges.selection.endDate);
+        }
     }
 
     const resetInput = () => {

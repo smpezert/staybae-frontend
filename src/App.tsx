@@ -4,7 +4,7 @@ import Layout from 'src/components/layout/Layout';
 import ProgressBar from '@badrap/bar-of-progress';
 import { QueryClientProvider, QueryClient } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
-
+import { disableReactDevTools } from '@fvilers/disable-react-devtools';
 
 //pages
 import Home from './pages/home/Home';
@@ -21,6 +21,10 @@ const progress = new ProgressBar({
 });
 
 const queryClient = new QueryClient();
+
+if (import.meta.env.REACT_APP_NODE_ENV == 'production') {
+  disableReactDevTools();
+}
 
 function App() {
 
