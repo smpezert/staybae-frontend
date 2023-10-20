@@ -15,7 +15,7 @@ interface PropertyType {
     dateTo: string;
     numRooms: number;
     numBeds: number;
-    numbToilets: number;
+    numToilets: number;
     sharedProperty: boolean;
     heroImg: string;
     images: string[];
