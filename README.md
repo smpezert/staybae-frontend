@@ -2,7 +2,7 @@
 
 ## Overview
 
-This codebase is the client-side for the Staybae application. It is built using React with Typescript.
+This codebase is the client-side for the Staybae application. It is built using React with Typescript. You can access the application online on the link https://staybae.onrender.com.
 
 ## Challenges during the assessment
 
