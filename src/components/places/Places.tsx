@@ -1,6 +1,7 @@
-import { GoogleMap, MarkerF, useLoadScript } from "@react-google-maps/api";
+import { GoogleMap, Libraries, MarkerF, useLoadScript } from "@react-google-maps/api";
 import { useEffect, useMemo, useState } from "react";
-import Axios from "src/api/Axios";
+
+const libs: Libraries = ["places"];
 
 type MapProps = {
     lat: number;
@@ -10,50 +11,49 @@ type MapProps = {
 const Places = ({ lat, lng }: MapProps) => {
 
     const { isLoaded } = useLoadScript({
-        id: "google-map-script",
-        googleMapsApiKey: import.meta.env.VITE_GOOGLE_MAPS_API_KEY
+        googleMapsApiKey: import.meta.env.VITE_GOOGLE_MAPS_API_KEY,
+        libraries: libs
     });
 
-    const PROPERTY_RADIUS = 5000;
-    const PLACE_TYPE = "restaurant";
-
-    const [Listing, setListing] = useState([]);
+    const [listing, setListing] = useState([]);
 
     useEffect(() => {
-        const fetchData = async () => {
-            const response = await Axios.get(`${import.meta.env.VITE_GOOGLE_MAPS_API_PLACES_URL}`,
-                {
-                    headers: { "Access-Control-Allow-Origin": `${import.meta.env.VITE_APP_API_URI}` },
-                    params: {
-                        location: `${lat},${lng}`,
-                        radius: PROPERTY_RADIUS,
-                        type: PLACE_TYPE,
-                        key: import.meta.env.VITE_GOOGLE_MAPS_API_KEY
-                    },
+        const value = window.localStorage.getItem("places");
+        setListing(JSON.parse(value ? value : "[]"));
+    }, []);
+
+    useEffect(() => {
+        if ({ lat, lng }) {
+            if (isLoaded) {
+                const request = {
+                    keyword: "places",
+                    location: new google.maps.LatLng(lat, lng),
+                    radius: 500,
+                };
+
+                const div = document.createElement("div");
+
+                const service = new google.maps.places.PlacesService(div);
+
+                service.nearbySearch(request, (results) => {
+                    if (google.maps.places.PlacesServiceStatus.OK) {
+                        const places: any = results ? results.map((result: google.maps.places.PlaceResult) => result) : [];
+
+                        setListing(places);
+                        window.localStorage.setItem("places", JSON.stringify(listing));
+                    }
                 });
-            setListing(response?.data.results);
-        };
-        fetchData();
-    }, [lat, lng])
-
-    const center = useMemo(() => ({ lat: 0, lng: 0 }), []);
-
-    if (!isLoaded) return <div>Map is loading ...</div>
-
-    if (!lat || !lng) return null;
+            }
+        }
+    }, [{ lat, lng }]);
 
     return (
         <div>
-            <div className="flex justify-center p-0">
-                <GoogleMap zoom={2} center={center} mapContainerClassName="h-80 w-full object-cover">
-                    <MarkerF position={{ lat: lat, lng: lng }} />
-                </GoogleMap>
-            </div>
             <hr className="w-full m-6 border-1 border-gray-200 mx-auto" />
             <div className="flex flex-col py-3 my-2">
                 <h1 className="text-xl md:text-2xl font-semibold">Places of interest nearby</h1>
                 <ul className="my-3 list-style-type:none;">
-                    {Listing.map((result: any, id: number) => (
+                    {listing.map((result: any, id: number) => (
                         <div className="flex flex-col my-7 space-x-6" key={id}>
                             <img className="flex items-center h-5 w-5 ml-6 rounded-full"
                                 src={result.icon} alt="place icon" height={50} width={150} />
@@ -64,7 +64,7 @@ const Places = ({ lat, lng }: MapProps) => {
                 </ul>
             </div>
         </div>
-    )
-}
+    );
+};
 
 export default Places;
