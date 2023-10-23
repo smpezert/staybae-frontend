@@ -44,7 +44,6 @@ Afterwards, you need to create an `.env` file on the root folder in which you wi
 VITE_GOOGLE_MAPS_API_URL=https://maps.googleapis.com/maps/api/js
 VITE_GOOGLE_MAPS_API_KEY=<your GOOGLE API key>
 VITE_APP_API_URI=http://localhost:8080/api
-VITE_GOOGLE_MAPS_API_PLACES_URL=https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/nearbysearch/json
 ```
 
 ### Starting the application
@@ -56,8 +55,6 @@ npm run dev
 ```
 
 This will start the application on port `4000`. You can open the application on your browser on `localhost:4000`.
-
-Then, only for development purposes, open the `https://cors-anywhere.herokuapp.com/corsdemo` on your browser and click on the `Request temporary access to the demo server` button. This will give you access to the GOOGLE MAPS PLACES API.
 
 ### Pages
 The application is rendering on these pages
