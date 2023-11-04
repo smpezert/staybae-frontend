@@ -49,7 +49,6 @@ const Places = ({ lat, lng }: MapProps) => {
 
     return (
         <div>
-            <hr className="w-full m-6 border-1 border-gray-200 mx-auto" />
             <div className="flex flex-col py-3 my-2">
                 <h1 className="text-xl md:text-2xl font-semibold">Places of interest nearby</h1>
                 <ul className="my-3 list-style-type:none;">
